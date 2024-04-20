@@ -1,5 +1,7 @@
 // Paul DiCarlo 
 // Use at your own risk
+// Only to be used as a study case based on panel dimensions from a publically available 1940 design
+// Buy real plans from a qualified naval architect.
 
 function drawBowTransom(xOffset, yOffset) {
 	D1=282.575
@@ -45,3 +47,4 @@ function drawBowTransom(xOffset, yOffset) {
 
 
 drawBowTransom(2000, 400)
+autoZoom()

@@ -4,6 +4,21 @@
 // Buy real plans from a qualified naval architect.
 
 
+function createSpline(points) {
+	var sp = new RSpline();
+
+	sp.setDegree(2)
+	sp.setPeriodic(false);
+
+	for (i=0; i<points.length;i++) {
+		sp.appendControlPoint(new RVector(points[i][0], points[i][1] + 3));
+	}
+	return addShape(sp)
+}
+
+
+
+/*
                             . . . . . . . . .                       
                         .                   |                      
                        \------ D1 ----------|
@@ -13,6 +28,7 @@
                            \--- D2 ------|--| 
                             .       D3   |  |
                               ..............
+*/
 
 
 
@@ -26,17 +42,15 @@ function drawSternTransom(xOffset, yOffset) {
 	// Top line of stern transome
 	v1=[xOffset + D1, yOffset + D4]
 	v2=[xOffset - D1, yOffset + D4]
-	//addSpline([v1,v2],false)
 	v1a=[xOffset + 0, yOffset + D4 + D3]
-	addSpline([v1, v1a, v2], false)
+	createSpline([v1, v1a, v2])
 
 	v3=[xOffset + D2, yOffset + D3]
 	v4=[xOffset - D2, yOffset + D3]
-	// addSpline([v3,v4],false)
 
 	// Vertical lines of Rear Trsnsom
-	addSpline([v1,v3],false)
-	addSpline([v2,v4],false)
+	addLine(v1,v3)
+	addLine(v2,v4)
 
 	x1 = D2*.90 +xOffset
 	x2 = D2*.75 + xOffset
@@ -47,8 +61,8 @@ function drawSternTransom(xOffset, yOffset) {
 	y1 = 0 + yOffset 
 
 	// Bottom line of transom
-	//addSpline([v3, [x1,y1], [x2,y1], [x3,y1], [x4,y1], [x5,y1],  v4], false)
-	addSpline([v3,  [x3,y1],  v4], false)
+	createSpline([v3,  [x3,y1],  v4])
 }
 
 drawSternTransom(D1, 490)
+autoZoom()
